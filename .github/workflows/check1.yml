@@ -1,0 +1,15 @@
+name: Check1
+
+on:
+    pull_request:
+        paths:
+            - check1.txt
+    workflow_dispatch:
+
+jobs:
+    check:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: check
+              run: if [ $(cat check1.txt | grep -c ok) -eq 1 ]; then exit 0; else exit 1; fi
