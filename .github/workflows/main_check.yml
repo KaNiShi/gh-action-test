@@ -3,6 +3,8 @@ name: MainCheck
 on:
   pull_request:
     types:
+      - opened
+      - ready_for_review
       - synchronize
   workflow_dispatch:
 
