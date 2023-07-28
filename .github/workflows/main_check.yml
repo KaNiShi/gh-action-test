@@ -19,5 +19,5 @@ jobs:
           script: |
             console.log(await github.rest.repos.listCommitStatusesForRef({
               ...context.repo,
-              ref: '${{ github.sha }}',
+              ref: '${{ github.event.pull_request.head.sha }}',
             }))
