@@ -1,0 +1,23 @@
+name: MainCheck
+
+on:
+  pull_request:
+    types:
+      - opened
+      - ready_for_review
+      - synchronize
+  workflow_dispatch:
+
+jobs:
+  check:
+    name: MainCheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            console.log(await github.rest.repos.listCommitStatusesForRef({
+              ...context.repo,
+              ref: '${{ github.event.pull_request.head.sha }}',
+            }))
